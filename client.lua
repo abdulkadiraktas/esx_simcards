@@ -21,7 +21,7 @@ RegisterNetEvent('matriarch_simcards:changeNumber')
 AddEventHandler('matriarch_simcards:changeNumber', function(xPlayer) 
     PlayerData = xPlayer   
     ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'number', {
-        title = "Enter your new cellphone number"
+        title = "Yeni cep telefonu numaranızı girin"
     }, function(data, menu)
         local number = data.value
         if number ~= nil then
@@ -39,17 +39,17 @@ AddEventHandler('matriarch_simcards:changeNumber', function(xPlayer)
                     if simCardCount > 0 then
                         TriggerServerEvent('matriarch_simcards:useSimCard', number)               
                     else 
-                        ESX.ShowNotification("You don't have any sim cards")
+                        ESX.ShowNotification("Sim kartın yok")
                     end  
                 else
-                    ESX.ShowNotification('Phone numbers must only contain digits')
+                    ESX.ShowNotification('Telefon numarası yalnızca rakam içermelidir')
                 end             
             else
-                ESX.ShowNotification('Phone numbers need to be ~r~7 ~w~digits')
+                ESX.ShowNotification('Telefon numarası ~r~7 ~w~ basamak olması gerekir)
             end
             menu.close()                 
         else
-            ESX.ShowNotification('~r~No number provided')
+            ESX.ShowNotification('~r~Herhangi bir numaraya sahip değilsin.')
             menu.close()
         end
 
@@ -79,7 +79,7 @@ AddEventHandler('matriarch_simcards:startNumChange', function(newNum)
         if complete then
             TriggerServerEvent('matriarch_simcards:changeNumber', newNum)        
             exports.dpemotes:EmoteCancel()                                              
-            ESX.ShowNotification('Phone number updated to ~g~' .. newNum)                                        
+            ESX.ShowNotification('Yeni numaran : ~g~' .. newNum)                                        
             if Config.gcphoneEnabled then
                 Citizen.Wait(2000) -- just give the update 2 seconds to hit DB before calling the gcphone update
                 TriggerServerEvent('gcPhone:allUpdate')
@@ -87,7 +87,7 @@ AddEventHandler('matriarch_simcards:startNumChange', function(newNum)
         end   
     else
         TriggerServerEvent('matriarch_simcards:changeNumber', newNum)   
-        ESX.ShowNotification('Phone number updated to ~g~' .. newNum)
+        ESX.ShowNotification('Yeni numaran : ~g~' .. newNum)
         Citizen.Wait(2000)                             
         if Config.gcphoneEnabled then
             TriggerServerEvent('gcPhone:allUpdate')
