@@ -12,7 +12,7 @@ AddEventHandler('matriarch_simcards:useSimCard', function(number)
     local numFinal = numFirstThree .. '-' .. numLastFour
     local result = MySQL.Sync.fetchAll("SELECT * FROM users WHERE phone_number = @phone_number", {['@phone_number'] = numFinal})
     if result[1] ~= nil then
-        TriggerClientEvent('esx:showNotification', _source, '~r~That number is already in use')
+        TriggerClientEvent('esx:showNotification', _source, '~r~Bu numara kullanılıyor.')
     else       
         TriggerClientEvent('matriarch_simcards:startNumChange', _source, numFinal)
     end     
